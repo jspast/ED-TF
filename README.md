@@ -5,7 +5,7 @@ Trabalho final de Estruturas de Dados - INF01203 C – 2023/2 - Renata Galante
 
 ___
 ### Comparação de duas estruturas de dados
-* Lista Simplesmente Encadeade (não-circular)
+* Lista Simplesmente Encadeada (não-circular)
 * Árvore Rubro-Negra
 
 ### Especificação do trabalho:
