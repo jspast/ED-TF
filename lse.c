@@ -1,93 +1,88 @@
 #include <stdio.h>
-#include <stdlib.h>  //necessaria para o malloc
+#include <stdlib.h> //necessaria para o malloc
 #include <string.h> //necessaria para o strcmp
+
 #include "lse.h"
 
-PtNo* cria_lista(void)
+PtNo *lse_cria_lista(void)
 {
-       return NULL;
+    return NULL;
 }
 
-PtNo* insere_ord (PtNo* l, InfoNo dados)
-{
-       PtNo *novo; //novo elemento
-       PtNo *ant = NULL; //ponteiro auxiliar para a posição anterior
-       PtNo *ptaux = l; //ponteiro auxiliar para percorrer a lista
+PtNo *lse_insere(PtNo *l, InfoNo dados) {
+    PtNo *novo;       // novo elemento
+    PtNo *ant = NULL; // ponteiro auxiliar para a posiÃ§Ã£o anterior
+    PtNo *ptaux = l;  // ponteiro auxiliar para percorrer a lista
 
-       /*aloca um novo nodo */
-       novo = (PtNo*) malloc(sizeof(PtNo));
+    /*aloca um novo nodo */
+    novo = (PtNo *)malloc(sizeof(PtNo));
 
-       /*insere a informação no novo nodo*/
-       novo->info = dados;
+    /*insere a informaÃ§Ã£o no novo nodo*/
+    novo->info = dados;
 
+    /*procurando a posiÃ§Ã£o de inserÃ§Ã£o*/
+    while (ptaux != NULL)
+    {
+        ant = ptaux;
+        ptaux = ptaux->prox;
+    }
 
-       /*procurando a posição de inserção*/
-       while ((ptaux!=NULL) && (strcmp(ptaux->info.titulo,dados.titulo)<0)) //se info.titulo < dados.titulo então strcmp retorna um valor menor que zero
-       {
-             ant = ptaux;
-             ptaux = ptaux->prox;
-       }
+    /*encaeia o elemento*/
+    if (ant == NULL) /*o anterior nÃ£o existe, logo o elemento serÃ¡ inserido na
+                        primeira posiÃ§Ã£o*/
+    {
+        //  puts("inserindo primeiro");
+        novo->prox = l;
+        l = novo;
+    } else /*elemento inserido no meio da lista*/
+    {
+        novo->prox = ant->prox;
+        ant->prox = novo;
+    }
 
-       /*encaeia o elemento*/
-       if (ant == NULL) /*o anterior não existe, logo o elemento será inserido na primeira posição*/
-       {
-             //  puts("inserindo primeiro");
-               novo->prox = l;
-               l = novo;
-       }
-       else /*elemento inserido no meio da lista*/
-       {
-            novo->prox = ant->prox;
-            ant->prox = novo;
-       }
-
-       return l;
+    return l;
 }
-void imprime(PtNo* l)
-{
-     PtNo* ptaux;
-     if (l == NULL)
+void lse_imprime(PtNo *l) {
+    PtNo *ptaux;
+    if (l == NULL)
         puts("lista vazia");
-     else
-     for (ptaux=l; ptaux!=NULL; ptaux=ptaux->prox)
-         printf("\nTitulo = %s Distribuidor = %s Diretor = %s\n",ptaux->info.titulo,ptaux->info.distr,ptaux->info.diretor);
+    else
+        for (ptaux = l; ptaux != NULL; ptaux = ptaux->prox)
+            printf("\nNumero = %d Senha = %s\n",
+                   ptaux->info.num, ptaux->info.senha);
 }
 
-PtNo* remover(PtNo* l, char titulo[20])
-{
-     PtNo *ant = NULL; //ponteiro auxiliar para a posição anterior
-     PtNo *ptaux = l; //ponteiro auxiliar para percorrer a lista
+PtNo *lse_remove(PtNo *l, int num) {
+    PtNo *ant = NULL; // ponteiro auxiliar para a posiÃ§Ã£o anterior
+    PtNo *ptaux = l;  // ponteiro auxiliar para percorrer a lista
 
-     /*procura o elemento na lista*/
-     while (ptaux !=NULL && (strcmp(ptaux->info.titulo, titulo)))
-     {
-          ant = ptaux;
-          ptaux = ptaux->prox;
-     }
+    /*procura o elemento na lista*/
+    while (ptaux != NULL && (ptaux->info.num == num)) {
+        ant = ptaux;
+        ptaux = ptaux->prox;
+    }
 
-     /*verifica se achou*/
-     if (ptaux == NULL)
-       return l; /*retorna a lista original*/
+    /*verifica se achou*/
+    if (ptaux == NULL)
+        return l; /*retorna a lista original*/
 
     if (ant == NULL) /*vai remover o primeiro elemento*/
-      l = ptaux->prox;
+        l = ptaux->prox;
     else /*vai remover do meio ou do final*/
-      ant->prox = ptaux->prox;
+        ant->prox = ptaux->prox;
 
-    free(ptaux); /*libera a memória alocada*/
+    free(ptaux); /*libera a memÃ³ria alocada*/
 
     return l;
 }
 
-PtNo* destroi(PtNo* l)
-{
-   PtNo *ptaux; //ponteiro auxiliar para percorrer a lista
-   while (l != NULL)
-   {
-         ptaux = l;
-         l = l->prox;
-         free(ptaux);
-   }
-   free(l);
-   return NULL;
+PtNo *lse_destroi(PtNo *l) {
+    PtNo *ptaux; // ponteiro auxiliar para percorrer a lista
+    while (l != NULL) {
+        ptaux = l;
+        l = l->prox;
+        free(ptaux);
+    }
+    free(l);
+    return NULL;
 }
