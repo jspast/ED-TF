@@ -1,10 +1,10 @@
 #ifndef SENHA_H
 #define SENHA_H
 
-typedef struct TipoInfoNo InfoNo;
+typedef struct TipoLogin Login;
 
-struct TipoInfoNo {
-    int num;
+struct TipoLogin {
+    int usr;
     char senha[32];
 };
 

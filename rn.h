@@ -5,7 +5,7 @@
 typedef struct RNnodo RNtree;
 
 struct RNnodo {
-    InfoNo info;
+    Login info;
     int red; /* se red=0 então o nodo é preto */
     struct RNnodo *esq;
     struct RNnodo *dir;
@@ -16,13 +16,13 @@ struct RNnodo {
 static RNtree *NodoNULL = NULL;
 
 // Definições das Funções
-RNtree *rn_insere(RNtree *t, InfoNo dados);
-char *rn_consulta(RNtree *t, int num);
-RNtree *rn_remove(RNtree *t, int num);
+RNtree *rn_insere(RNtree *t, Login dados);
+char *rn_consulta(RNtree *t, int usr);
+RNtree *rn_remove(RNtree *t, int usr);
 void rn_destroi(RNtree *t);
 
 // Funções Auxiliares
-RNtree *VerificaRN(RNtree *t, int num);
+RNtree *VerificaRN(RNtree *t, int usr);
 RNtree *RotacaoSimplesEsq(RNtree *t);
 RNtree *RotacaoSimplesDir(RNtree *t);
 void Desenha(RNtree *t, int nivel);

@@ -4,18 +4,18 @@
 
 #include "lse.h"
 
-PtNo *lse_cria_lista(void)
+LSE *lse_cria_lista(void)
 {
     return NULL;
 }
 
-PtNo *lse_insere(PtNo *l, InfoNo dados) {
-    PtNo *novo;       // novo elemento
-    PtNo *ant = NULL; // ponteiro auxiliar para a posição anterior
-    PtNo *ptaux = l;  // ponteiro auxiliar para percorrer a lista
+LSE *lse_insere(LSE *l, Login dados) {
+    LSE *novo;       // novo elemento
+    LSE *ant = NULL; // ponteiro auxiliar para a posição anterior
+    LSE *ptaux = l;  // ponteiro auxiliar para percorrer a lista
 
     /*aloca um novo nodo */
-    novo = (PtNo *)malloc(sizeof(PtNo));
+    novo = (LSE *)malloc(sizeof(LSE));
 
     /*insere a informação no novo nodo*/
     novo->info = dados;
@@ -43,11 +43,11 @@ PtNo *lse_insere(PtNo *l, InfoNo dados) {
     return l;
 }
 
-char *lse_consulta(PtNo *l, int num) {
-    PtNo *ptaux = l;  // ponteiro auxiliar para percorrer a lista
+char *lse_consulta(LSE *l, int usr) {
+    LSE *ptaux = l;  // ponteiro auxiliar para percorrer a lista
 
     /*procura o elemento na lista*/
-    while (ptaux != NULL && (ptaux->info.num != num))
+    while (ptaux != NULL && (ptaux->info.usr != usr))
         ptaux = ptaux->prox;
 
     /*verifica se achou*/
@@ -57,12 +57,12 @@ char *lse_consulta(PtNo *l, int num) {
         return ptaux->info.senha;
 }
 
-PtNo *lse_remove(PtNo *l, int num) {
-    PtNo *ant = NULL; // ponteiro auxiliar para a posição anterior
-    PtNo *ptaux = l;  // ponteiro auxiliar para percorrer a lista
+LSE *lse_remove(LSE *l, int usr) {
+    LSE *ant = NULL; // ponteiro auxiliar para a posição anterior
+    LSE *ptaux = l;  // ponteiro auxiliar para percorrer a lista
 
     /*procura o elemento na lista*/
-    while (ptaux != NULL && (ptaux->info.num == num)) {
+    while (ptaux != NULL && (ptaux->info.usr == usr)) {
         ant = ptaux;
         ptaux = ptaux->prox;
     }
@@ -81,8 +81,8 @@ PtNo *lse_remove(PtNo *l, int num) {
     return l;
 }
 
-PtNo *lse_destroi(PtNo *l) {
-    PtNo *ptaux; // ponteiro auxiliar para percorrer a lista
+LSE *lse_destroi(LSE *l) {
+    LSE *ptaux; // ponteiro auxiliar para percorrer a lista
     while (l != NULL) {
         ptaux = l;
         l = l->prox;

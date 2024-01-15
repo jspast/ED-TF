@@ -1,15 +1,20 @@
+#ifndef LSE_H
+#define LSE_H
+
 #include "senha.h"
 
-typedef struct TipoPtNo PtNo;
+typedef struct LSEnodo LSE;
 
-struct TipoPtNo {
-    InfoNo info;
-    PtNo *prox;
+struct LSEnodo {
+    Login info;
+    LSE *prox;
 };
 
-PtNo *lse_cria_lista(void);
-PtNo *lse_insere(PtNo *l, InfoNo dados);
-void lse_imprime(PtNo *l);
-char *lse_consulta(PtNo *l, int num);
-PtNo *lse_remove(PtNo *l, int num);
-PtNo *lse_destroi(PtNo *l);
+LSE *lse_cria_lista(void);
+LSE *lse_insere(LSE *l, Login dados);
+void lse_imprime(LSE *l);
+char *lse_consulta(LSE *l, int usr);
+LSE *lse_remove(LSE *l, int usr);
+LSE *lse_destroi(LSE *l);
+
+#endif
