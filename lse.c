@@ -42,14 +42,19 @@ PtNo *lse_insere(PtNo *l, InfoNo dados) {
 
     return l;
 }
-void lse_imprime(PtNo *l) {
-    PtNo *ptaux;
-    if (l == NULL)
-        puts("lista vazia");
+
+char *lse_consulta(PtNo *l, int num) {
+    PtNo *ptaux = l;  // ponteiro auxiliar para percorrer a lista
+
+    /*procura o elemento na lista*/
+    while (ptaux != NULL && (ptaux->info.num != num))
+        ptaux = ptaux->prox;
+
+    /*verifica se achou*/
+    if (ptaux == NULL)
+        return NULL;
     else
-        for (ptaux = l; ptaux != NULL; ptaux = ptaux->prox)
-            printf("\nNumero = %d Senha = %s\n",
-                   ptaux->info.num, ptaux->info.senha);
+        return ptaux->info.senha;
 }
 
 PtNo *lse_remove(PtNo *l, int num) {

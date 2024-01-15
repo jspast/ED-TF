@@ -3,7 +3,7 @@
 
 #include "rn.h"
 
-RNtree *rn_insere(RNtree *t, int num) {
+RNtree *rn_insere(RNtree *t, InfoNo dados) {
     RNtree *x = t;
 
     if (t == NULL) {
@@ -15,10 +15,10 @@ RNtree *rn_insere(RNtree *t, int num) {
         NodoNULL->red = 0; // null é preto;
         NodoNULL->esq = NodoNULL;
         NodoNULL->dir = NodoNULL;
-        NodoNULL->num = 32000;
+        NodoNULL->info.num = 32000;
         NodoNULL->pai = NodoNULL;
         // Raiz
-        x->num = num;
+        x->info = dados;
         x->esq = x->dir = NodoNULL;
         x->red = 0;
         x->pai = NodoNULL;
@@ -32,7 +32,7 @@ RNtree *rn_insere(RNtree *t, int num) {
     {
         v = p;
         p = x;
-        if (num < x->num)
+        if (dados.num < x->info.num)
             x = x->esq;
         else
             x = x->dir;
@@ -42,12 +42,12 @@ RNtree *rn_insere(RNtree *t, int num) {
         return t; // Nodo Ja Existe
 
     x = (RNtree *)malloc(sizeof(RNtree));
-    x->num = num;
+    x->info = dados;
     x->esq = x->dir = NodoNULL;
     x->pai = p;
     x->red = 1;
 
-    if (num < p->num)
+    if (dados.num < p->info.num)
         p->esq = x;
     else
         p->dir = x;
@@ -55,18 +55,18 @@ RNtree *rn_insere(RNtree *t, int num) {
     // Nodo Foi Inserido mas pode ter modificado as regras então temos que
     // verificar.
 
-    return VerificaRN(t, num);
+    return VerificaRN(t, dados.num);
 }
 
-int rn_consulta(int X, RNtree *T) {
-    if (T == NodoNULL)
-        return 0;
-    if (X == T->num)
-        return 1;
-    else if (X < T->num)
-        return rn_consulta(X, T->esq);
-    else if (X > T->num)
-        return rn_consulta(X, T->dir);
+char *rn_consulta(RNtree *t, int num) {
+    if (t == NodoNULL)
+        return NULL;
+    if (num == t->info.num)
+        return t->info.senha;
+    else if (num < t->info.num)
+        return rn_consulta(t->esq, num);
+    else if (num > t->info.num)
+        return rn_consulta(t->dir, num);
     else
         return 0;
 }
@@ -77,12 +77,12 @@ RNtree *rn_remove(RNtree *t, int num) {
     RNtree *p = x->pai;
     RNtree *v = p->pai;
 
-    NodoNULL->num = num;
-    while (x->num != num) /* desce na árvore */
+    NodoNULL->info.num = num;
+    while (x->info.num != num) /* desce na árvore */
     {
         v = p;
         p = x;
-        if (num < x->num)
+        if (num < x->info.num)
             x = x->esq;
         else
             x = x->dir;
@@ -93,14 +93,14 @@ RNtree *rn_remove(RNtree *t, int num) {
     {
         if ((x->esq == NodoNULL) && (x->dir == NodoNULL)) // nodo folha
         {
-            if (x->num < p->num)
+            if (x->info.num < p->info.num)
                 p->esq = NodoNULL;
             else
                 p->dir = NodoNULL;
             free(x);
             return t;
         }
-        if (x->num < p->num) {
+        if (x->info.num < p->info.num) {
             y = Menor(t->dir);
             p->esq = y;
             y->esq = x->esq;
@@ -115,7 +115,7 @@ RNtree *rn_remove(RNtree *t, int num) {
         }
     } else // nodo é preto
     {
-        if (x->num < p->num) // filho a esquerda
+        if (x->info.num < p->info.num) // filho a esquerda
         {
             if ((p->dir->red == 0) &&
                 ((x->esq->red == 0) &&
@@ -207,11 +207,11 @@ RNtree *VerificaRN(RNtree *t, int num) {
     RNtree *x = t;
     RNtree *p = x->pai;
     RNtree *v = p->pai;
-    while (x->num != num) /* desce na árvore */
+    while (x->info.num != num) /* desce na árvore */
     {
         v = p;
         p = x;
-        if (num < x->num)
+        if (num < x->info.num)
             x = x->esq;
         else
             x = x->dir;
@@ -225,7 +225,7 @@ RNtree *VerificaRN(RNtree *t, int num) {
     if (p->red) {
         if (v != NodoNULL) // pai não é raiz
         {
-            if (p->num < v->num) // p é filho a esquerda
+            if (p->info.num < v->info.num) // p é filho a esquerda
             {
                 // Caso 2.1
                 if (v->dir->red) // tio é vermelho
@@ -242,7 +242,7 @@ RNtree *VerificaRN(RNtree *t, int num) {
                         v->red = 0;
                     }
                 } else {
-                    if ((x->num < p->num) && (p->num < v->num)) // Caso 2.2(A)
+                    if ((x->info.num < p->info.num) && (p->info.num < v->info.num)) // Caso 2.2(A)
                     {
                         // rotacao a direita
                         RotacaoSimplesDir(v);
@@ -255,8 +255,8 @@ RNtree *VerificaRN(RNtree *t, int num) {
                         else
                             v->red = 1;
                     } else {
-                        if ((x->num > p->num) &&
-                            (p->num > v->num)) // Caso 2.2(B)
+                        if ((x->info.num > p->info.num) &&
+                            (p->info.num > v->info.num)) // Caso 2.2(B)
                         {
                             RotacaoSimplesEsq(v);
                             if (p->red)
@@ -268,7 +268,7 @@ RNtree *VerificaRN(RNtree *t, int num) {
                             else
                                 v->red = 1;
                         } else {
-                            if (p->num < v->num) // Caso 2.2(C)
+                            if (p->info.num < v->info.num) // Caso 2.2(C)
                             {
                                 RotacaoSimplesEsq(p);
                                 RotacaoSimplesDir(v); // rotacao Dupla a direita
@@ -313,7 +313,7 @@ RNtree *VerificaRN(RNtree *t, int num) {
                         v->red = 0;
                     }
                 } else {
-                    if ((x->num < p->num) && (p->num < v->num)) // Caso 2.2(A)
+                    if ((x->info.num < p->info.num) && (p->info.num < v->info.num)) // Caso 2.2(A)
                     {
                         // rotacao a direita
                         RotacaoSimplesDir(v);
@@ -326,8 +326,8 @@ RNtree *VerificaRN(RNtree *t, int num) {
                         else
                             v->red = 1;
                     } else {
-                        if ((x->num > p->num) &&
-                            (p->num > v->num)) // Caso 2.2(B)
+                        if ((x->info.num > p->info.num) &&
+                            (p->info.num > v->info.num)) // Caso 2.2(B)
                         {
                             RotacaoSimplesEsq(v); // --- aqui
                             if (p->red)
@@ -339,7 +339,7 @@ RNtree *VerificaRN(RNtree *t, int num) {
                             else
                                 v->red = 1;
                         } else {
-                            if (p->num < v->num) // Caso 2.2(C)
+                            if (p->info.num < v->info.num) // Caso 2.2(C)
                             {
                                 RotacaoSimplesEsq(p);
                                 RotacaoSimplesDir(v); // rotacao Dupla a direita
@@ -403,9 +403,9 @@ void Desenha(RNtree *t, int nivel) {
         for (x = 1; x <= nivel; x++)
             printf("=");
         if (t->red)
-            printf("%d Red\n", t->num);
+            printf("%d Red\n", t->info.num);
         else
-            printf("%d Black\n", t->num);
+            printf("%d Black\n", t->info.num);
         if (t->esq != NodoNULL)
             Desenha(t->esq, (nivel + 1));
         if (t->dir != NodoNULL)
