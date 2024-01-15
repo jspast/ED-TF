@@ -1,10 +1,6 @@
-typedef struct TipoInfoNo InfoNo;
-typedef struct TipoPtNo PtNo;
+#include "senha.h"
 
-struct TipoInfoNo {
-    int num;
-    char senha[32];
-};
+typedef struct TipoPtNo PtNo;
 
 struct TipoPtNo {
     InfoNo info;
@@ -14,5 +10,6 @@ struct TipoPtNo {
 PtNo *lse_cria_lista(void);
 PtNo *lse_insere(PtNo *l, InfoNo dados);
 void lse_imprime(PtNo *l);
+char *lse_consulta(PtNo *l, int num);
 PtNo *lse_remove(PtNo *l, int num);
 PtNo *lse_destroi(PtNo *l);

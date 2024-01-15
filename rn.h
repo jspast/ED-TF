@@ -1,10 +1,11 @@
 #include <stdlib.h>
 
+#include "senha.h"
+
 typedef struct RNnodo RNtree;
 
 struct RNnodo {
-    int num;
-    char senha[32];
+    InfoNo info;
     int red; /* se red=0 então o nodo é preto */
     struct RNnodo *esq;
     struct RNnodo *dir;
@@ -15,8 +16,8 @@ struct RNnodo {
 static RNtree *NodoNULL = NULL;
 
 // Definições das Funções
-RNtree *rn_insere(RNtree *t, int num);
-int rn_consulta(int X, RNtree *T);
+RNtree *rn_insere(RNtree *t, InfoNo dados);
+char *rn_consulta(RNtree *t, int num);
 RNtree *rn_remove(RNtree *t, int num);
 void rn_destroi(RNtree *t);
 
