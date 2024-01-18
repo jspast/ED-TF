@@ -1,0 +1,7 @@
+Testes com LSE:
+1	teste	OK
+Tempo de consulta: 0 segundos
+
+Testes com RN:
+1	teste	OK
+Tempo de consulta: 0 segundos

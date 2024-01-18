@@ -3,45 +3,55 @@
 
 #include "lse.h"
 #include "rn.h"
-#include "senha.h"
 #include "arquivos.h"
 
 int main(int argc, char *argv[])
 {
     LSE *l = lse_cria_lista();
     RNtree *t = NodoNULL;
-    char nome_arquivo[TAM_ARQUIVO];
+    char nome_dados[TAM_ARQUIVOS] = DADOS;
+    char nome_testes[TAM_ARQUIVOS] = TESTES;
+    char nome_resultados[TAM_ARQUIVOS] = RESULTADOS;
     double tempo;
 
-    if(argc == 1) {
-        puts("Digite o nome do arquivo da base de dados");
-        scanf("%s", nome_arquivo);
+    if(argc > 1 && strcmp(argv[1], "-d") == 0) {
+        puts("Usando nomes de arquivos default");
     } else {
-        strcpy(nome_arquivo, argv[1]);
+        if (argc <= 1) {
+            puts("Digite o nome do arquivo da base de dados:");
+            scanf("%s", nome_dados);
+        } else {
+            strcpy(nome_dados, argv[1]);
+        }
+        if (argc <= 2) {
+            puts("Digite o nome do arquivo da base de testes:");
+            scanf("%s", nome_testes);
+        } else {
+            strcpy(nome_testes, argv[2]);
+        }
+        if (argc <= 3) {
+            puts("Digite o nome do arquivo dos resultados:");
+            scanf("%s", nome_resultados);
+        } else {
+            strcpy(nome_resultados, argv[3]);
+        }
     }
 
     // Teste LSE
-    l = lse_carrega(l, nome_arquivo, &tempo);
+    l = lse_carrega(l, nome_dados, &tempo);
     if (l == NULL)
         return 0;
-    if(strcmp(lse_consulta(l, 1), "teste") == 0)
-        puts("Teste LSE: Senha correta!");
-    else
-        puts("Teste LSE: Senha incorreta!");
-
     printf("Tempo de carregamento LSE: %.0lf segundos\n", tempo);
 
+    lse_avalia(l, nome_testes, nome_resultados, &tempo);
+
     // Teste RN
-    t = rn_carrega(t, nome_arquivo, &tempo);
+    t = rn_carrega(t, nome_dados, &tempo);
     if (t == NULL)
         return 0;
-    t = rn_insere(t, (Login){1, "test"});
-    if(strcmp(rn_consulta(t, 1), "teste") == 0)
-        puts("Teste RN: Senha correta!");
-    else
-        puts("Teste RN: Senha incorreta!");
-
     printf("Tempo de carregamento RN: %.0lf segundos\n", tempo);
+    
+    rn_avalia(t, nome_testes, nome_resultados, &tempo);
 
     return 0;
 }

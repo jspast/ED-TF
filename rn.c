@@ -66,7 +66,7 @@ char *rn_consulta(RNtree *t, int usr) {
     else if (usr > t->info.usr)
         return rn_consulta(t->dir, usr);
     else
-        return 0;
+        return NULL;
 }
 
 RNtree *rn_remove(RNtree *t, int usr) {
