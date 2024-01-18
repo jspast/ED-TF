@@ -26,11 +26,9 @@ RNtree *rn_insere(RNtree *t, Login dados) {
     }
 
     RNtree *p = x->pai; // pai
-    RNtree *v = p->pai; // vo
 
     while (x != NodoNULL) /* desce na árvore */
     {
-        v = p;
         p = x;
         if (dados.usr < x->info.usr)
             x = x->esq;
@@ -75,12 +73,10 @@ RNtree *rn_remove(RNtree *t, int usr) {
     RNtree *x = t;
     RNtree *y;
     RNtree *p = x->pai;
-    RNtree *v = p->pai;
 
     NodoNULL->info.usr = usr;
     while (x->info.usr != usr) /* desce na árvore */
     {
-        v = p;
         p = x;
         if (usr < x->info.usr)
             x = x->esq;
@@ -198,11 +194,11 @@ RNtree *rn_remove(RNtree *t, int usr) {
     VerificaRN(t, usr);
     return t;
 }
-
+/*
 void rn_destroi(RNtree *t){
 
 }
-
+*/
 RNtree *VerificaRN(RNtree *t, int usr) {
     RNtree *x = t;
     RNtree *p = x->pai;
