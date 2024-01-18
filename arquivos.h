@@ -16,5 +16,6 @@
 FILE *carrega_arquivo(char nome[]);
 Login monta_login(char linha[]);
 LSE *lse_carrega(LSE *l, char nome[], double *tempo);
+RNtree *rn_carrega(RNtree *t, char nome[], double *tempo);
 
 #endif

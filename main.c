@@ -19,26 +19,29 @@ int main(int argc, char *argv[])
     } else {
         strcpy(nome_arquivo, argv[1]);
     }
+
+    // Teste LSE
     l = lse_carrega(l, nome_arquivo, &tempo);
     if (l == NULL)
         return 0;
-
-    // Teste LSE
     if(strcmp(lse_consulta(l, 1), "teste") == 0)
         puts("Teste LSE: Senha correta!");
     else
         puts("Teste LSE: Senha incorreta!");
 
-    printf("Tempo: %lf\n", tempo);
+    printf("Tempo de carregamento LSE: %.0lf segundos\n", tempo);
 
-    /*
     // Teste RN
+    t = rn_carrega(t, nome_arquivo, &tempo);
+    if (t == NULL)
+        return 0;
     t = rn_insere(t, (Login){1, "test"});
     if(strcmp(rn_consulta(t, 1), "teste") == 0)
         puts("Teste RN: Senha correta!");
     else
-        printf("Senha incorreta");
-    */
+        puts("Teste RN: Senha incorreta!");
+
+    printf("Tempo de carregamento RN: %.0lf segundos\n", tempo);
 
     return 0;
 }
