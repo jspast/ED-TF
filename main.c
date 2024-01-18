@@ -10,13 +10,20 @@ int main(int argc, char *argv[])
 {
     LSE *l = lse_cria_lista();
     RNtree *t = NodoNULL;
-    char nome_arquivo[32];
+    char nome_arquivo[TAM_ARQUIVO];
     double tempo;
 
-    puts("Digite o nome do arquivo da base de dados");
-    scanf("%s", nome_arquivo);
-
+    if(argc == 1) {
+        puts("Digite o nome do arquivo da base de dados");
+        scanf("%s", nome_arquivo);
+    } else {
+        strcpy(nome_arquivo, argv[1]);
+    }
     l = lse_carrega(l, nome_arquivo, &tempo);
+    if (l == NULL)
+        return 0;
+
+    // Teste LSE
     if(strcmp(lse_consulta(l, 1), "teste") == 0)
         puts("Teste LSE: Senha correta!");
     else

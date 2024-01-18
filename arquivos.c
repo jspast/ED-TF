@@ -6,8 +6,7 @@
 #include "lse.h"
 #include "rn.h"
 #include "senha.h"
-
-#define TAM_LINHA (TAM_LOGIN + 2)
+#include "arquivos.h"
 
 FILE *carrega_arquivo(char nome[])
 {
@@ -21,20 +20,20 @@ FILE *carrega_arquivo(char nome[])
 
 Login monta_login(char linha[])
 {
-    int usr;
-    char senha[TAM_SENHA];
+    Login login;
 
-    usr = atoi(strtok(linha,","));
-    strcpy(senha, strtok(NULL,","));
+    login.usr = atoi(strtok(linha,","));
+    strcpy(login.senha, strtok(NULL,","));
+    login.senha[strcspn(login.senha, "\r\n")] = 0;  // revove o "\n" no final
 
-    return (Login){usr, {senha[TAM_SENHA]}};
+    return login;
 }
 
 LSE *lse_carrega(LSE *l, char nome[], double *tempo)
 {
     FILE *arq1 = carrega_arquivo(nome);
     if (arq1 == NULL)
-        return 0;
+        return NULL;
 
     time_t tempo_inicio, tempo_fim;
     time(&tempo_inicio);
