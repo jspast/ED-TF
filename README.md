@@ -9,8 +9,8 @@ ___
 * Árvore Rubro-Negra
 
 ### ToDo:
-- [ ] Funções carrega para ambas estruturas de dados (insere base de dados na estrutura)
-  - [ ] Imprime o tempo de execução
+- [x] Funções carrega para ambas estruturas de dados (insere base de dados na estrutura)
+  - [x] Imprime o tempo de execução
     
 - [ ] Funções avalia para ambas estruturas de dados (verifica as senhas da base de testes)
   - [ ] Escreve em um arquivo o resultado das verificações
