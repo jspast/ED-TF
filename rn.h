@@ -1,3 +1,6 @@
+#ifndef RN_H
+#define RN_H
+
 #include <stdlib.h>
 
 #include "senha.h"
@@ -28,3 +31,5 @@ RNtree *RotacaoSimplesDir(RNtree *t);
 void Desenha(RNtree *t, int nivel);
 RNtree *Maior(RNtree *t);
 RNtree *Menor(RNtree *t);
+
+#endif
