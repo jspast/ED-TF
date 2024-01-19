@@ -3,13 +3,15 @@
 
 #include "rn.h"
 
-RNtree *rn_insere(RNtree *t, Login dados) {
+RNtree *rn_insere(RNtree *t, Login dados)
+{
     RNtree *x = t;
 
     if (t == NULL) {
         // alocação de espaço
         NodoNULL = (RNtree *)malloc(sizeof(RNtree));
         x = (RNtree *)malloc(sizeof(RNtree));
+        
         // inicializações
         //  NULL
         NodoNULL->red = 0; // null é preto;
@@ -17,11 +19,13 @@ RNtree *rn_insere(RNtree *t, Login dados) {
         NodoNULL->dir = NodoNULL;
         NodoNULL->info.usr = 32000;
         NodoNULL->pai = NodoNULL;
+
         // Raiz
         x->info = dados;
         x->esq = x->dir = NodoNULL;
         x->red = 0;
         x->pai = NodoNULL;
+
         return x;
     }
 
@@ -52,21 +56,25 @@ RNtree *rn_insere(RNtree *t, Login dados) {
 
     // Nodo Foi Inserido mas pode ter modificado as regras então temos que
     // verificar.
-
     return VerificaRN(t, dados.usr);
 }
 
-char *rn_consulta(RNtree *t, int usr) {
-    if (t == NodoNULL)
+// Função otimizada pelo Github Copilot
+char *rn_consulta(RNtree *t, int usr)
+{
+    if (t == NULL)
         return NULL;
-    if (usr == t->info.usr)
-        return t->info.senha;
-    else if (usr < t->info.usr)
-        return rn_consulta(t->esq, usr);
-    else if (usr > t->info.usr)
-        return rn_consulta(t->dir, usr);
-    else
-        return NULL;
+
+    while (t != NodoNULL) {
+        if (usr == t->info.usr) {
+            return t->info.senha;
+        } else if (usr < t->info.usr) {
+            t = t->esq;
+        } else {
+            t = t->dir;
+        }
+    }
+    return NULL;
 }
 
 RNtree *rn_remove(RNtree *t, int usr) {
@@ -199,12 +207,14 @@ void rn_destroi(RNtree *t){
 
 }
 */
+
+// Função corrigida(!) e otimizada pelo Github Copilot
 RNtree *VerificaRN(RNtree *t, int usr) {
     RNtree *x = t;
-    RNtree *p = x->pai;
-    RNtree *v = p->pai;
-    while (x->info.usr != usr) /* desce na árvore */
-    {
+    RNtree *p = NULL;
+    RNtree *v = NULL;
+
+    while (x != NULL && x->info.usr != usr) {
         v = p;
         p = x;
         if (usr < x->info.usr)
@@ -212,184 +222,77 @@ RNtree *VerificaRN(RNtree *t, int usr) {
         else
             x = x->dir;
     }
-    // x contêm o novo e p o pai do novo.
 
-    /* if(p->red == 0) - caso 1
-       insere vermelho mas já tá então não precisa modificar.
-    */
-    // caso 2
-    if (p->red) {
-        if (v != NodoNULL) // pai não é raiz
-        {
-            if (p->info.usr < v->info.usr) // p é filho a esquerda
-            {
-                // Caso 2.1
-                if (v->dir->red) // tio é vermelho
-                {
-                    v->dir->red = 0; // tio vira preto
-                    if (p->red)
-                        p->red = 0; // troca a cor do pai
-                    else
-                        p->red = 1;
-                    if (v->pai == NodoNULL) // avô é raiz
-                    {
-                        p->dir->red = 0;
-                        p->red = 0;
-                        v->red = 0;
-                    }
+    if (x == NULL) {
+        // Node with given usr not found
+        return t;
+    }
+
+    if (p != NULL && p->red) {
+        if (v != NULL) {
+            if (p == v->esq) {
+                if (v->dir != NULL && v->dir->red) {
+                    v->dir->red = 0;
+                    p->red = 0;
+                    v->red = 1;
                 } else {
-                    if ((x->info.usr < p->info.usr) && (p->info.usr < v->info.usr)) // Caso 2.2(A)
-                    {
-                        // rotacao a direita
-                        RotacaoSimplesDir(v);
-                        if (p->red)
-                            p->red = 0; // troca a cor do pai
-                        else
-                            p->red = 1;
-                        if (v->red)
-                            v->red = 0; // troca a cor do vo
-                        else
-                            v->red = 1;
+                    if (x == p->esq && p == v->esq) {
+                        t = RotacaoSimplesDir(v);
+                    } else if (x == p->dir && p == v->dir) {
+                        t = RotacaoSimplesEsq(v);
+                    } else if (x == p->dir && p == v->esq) {
+                        t = RotacaoSimplesEsq(p);
+                        t = RotacaoSimplesDir(v);
                     } else {
-                        if ((x->info.usr > p->info.usr) &&
-                            (p->info.usr > v->info.usr)) // Caso 2.2(B)
-                        {
-                            RotacaoSimplesEsq(v);
-                            if (p->red)
-                                p->red = 0; // troca a cor do pai
-                            else
-                                p->red = 1;
-                            if (v->red)
-                                v->red = 0; // troca a cor do vo
-                            else
-                                v->red = 1;
-                        } else {
-                            if (p->info.usr < v->info.usr) // Caso 2.2(C)
-                            {
-                                RotacaoSimplesEsq(p);
-                                RotacaoSimplesDir(v); // rotacao Dupla a direita
-                                if (x->red)
-                                    x->red = 0; // troca a cor do novo
-                                else
-                                    x->red = 1;
-                                if (v->red)
-                                    v->red = 0; // troca a cor do vo
-                                else
-                                    v->red = 1;
-                            } else // Caso 2.2(D)
-                            {
-                                RotacaoSimplesDir(p);
-                                RotacaoSimplesEsq(
-                                    v); // rotacao Dupla a esquerda
-                                if (x->red)
-                                    x->red = 0; // troca a cor do novo
-                                else
-                                    x->red = 1;
-                                if (v->red)
-                                    v->red = 0; // troca a cor do vo
-                                else
-                                    v->red = 1;
-                            }
-                        }
+                        t = RotacaoSimplesDir(p);
+                        t = RotacaoSimplesEsq(v);
                     }
+                    x->red = 0;
+                    v->red = 1;
                 }
             } else {
-                // Caso 2.1
-                if (v->esq->red) // tio é vermelho
-                {
-                    v->esq->red = 0; // tio vira preto
-                    if (p->red)
-                        p->red = 0; // troca a cor do pai
-                    else
-                        p->red = 1;
-                    if (v->pai == NodoNULL) // avô é raiz
-                    {
-                        p->dir->red = 0;
-                        p->red = 0;
-                        v->red = 0;
-                    }
+                if (v->esq != NULL && v->esq->red) {
+                    v->esq->red = 0;
+                    p->red = 0;
+                    v->red = 1;
                 } else {
-                    if ((x->info.usr < p->info.usr) && (p->info.usr < v->info.usr)) // Caso 2.2(A)
-                    {
-                        // rotacao a direita
-                        RotacaoSimplesDir(v);
-                        if (p->red)
-                            p->red = 0; // troca a cor do pai
-                        else
-                            p->red = 1;
-                        if (v->red)
-                            v->red = 0; // troca a cor do vo
-                        else
-                            v->red = 1;
+                    if (x == p->esq && p == v->esq) {
+                        t = RotacaoSimplesDir(v);
+                    } else if (x == p->dir && p == v->dir) {
+                        t = RotacaoSimplesEsq(v);
+                    } else if (x == p->dir && p == v->esq) {
+                        t = RotacaoSimplesEsq(p);
+                        t = RotacaoSimplesDir(v);
                     } else {
-                        if ((x->info.usr > p->info.usr) &&
-                            (p->info.usr > v->info.usr)) // Caso 2.2(B)
-                        {
-                            RotacaoSimplesEsq(v); // --- aqui
-                            if (p->red)
-                                p->red = 0; // troca a cor do pai
-                            else
-                                p->red = 1;
-                            if (v->red)
-                                v->red = 0; // troca a cor do vo
-                            else
-                                v->red = 1;
-                        } else {
-                            if (p->info.usr < v->info.usr) // Caso 2.2(C)
-                            {
-                                RotacaoSimplesEsq(p);
-                                RotacaoSimplesDir(v); // rotacao Dupla a direita
-                                if (x->red)
-                                    x->red = 0; // troca a cor do novo
-                                else
-                                    x->red = 1;
-                                if (v->red)
-                                    v->red = 0; // troca a cor do vo
-                                else
-                                    v->red = 1;
-                            } else // Caso 2.2(D)
-                            {
-                                RotacaoSimplesDir(p);
-                                RotacaoSimplesEsq(
-                                    v); // rotacao Dupla a esquerda
-                                if (x->red)
-                                    x->red = 0; // troca a cor do novo
-                                else
-                                    x->red = 1;
-                                if (v->red)
-                                    v->red = 0; // troca a cor do vo
-                                else
-                                    v->red = 1;
-                            }
-                        }
+                        t = RotacaoSimplesDir(p);
+                        t = RotacaoSimplesEsq(v);
                     }
+                    x->red = 0;
+                    v->red = 1;
                 }
             }
         }
     }
+
     t->red = 0;
     x->red = 1;
     return t;
 }
 
+// Função otimizada pelo Github Copilot
 RNtree *RotacaoSimplesDir(RNtree *t) {
-    RNtree *aux;
-
-    aux = t->esq;
+    RNtree *aux = t->esq;
     t->esq = aux->dir;
     aux->dir = t;
-
-    return aux; /* nova raiz */
+    return aux; // new root
 }
 
+// Função otimizada pelo Github Copilot
 RNtree *RotacaoSimplesEsq(RNtree *t) {
-    RNtree *aux;
-
-    aux = t->dir;
+    RNtree *aux = t->dir;
     t->dir = aux->esq;
     aux->esq = t;
-
-    return aux; /* nova raiz */
+    return aux; // new root
 }
 
 void Desenha(RNtree *t, int nivel) {

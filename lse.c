@@ -9,38 +9,14 @@ LSE *lse_cria_lista(void)
     return NULL;
 }
 
+// Insere sempre no início (mais eficiente) porque a ordem não importa
 LSE *lse_insere(LSE *l, Login dados) {
-    LSE *novo;       // novo elemento
-    LSE *ant = NULL; // ponteiro auxiliar para a posição anterior
-    LSE *ptaux = l;  // ponteiro auxiliar para percorrer a lista
-
-    /*aloca um novo nodo */
-    novo = (LSE *)malloc(sizeof(LSE));
-
-    /*insere a informação no novo nodo*/
+    LSE *novo = (LSE *)malloc(sizeof(LSE)); // Aloca memória para o novo nó
+    
     novo->info = dados;
+    novo->prox = l;
 
-    /*procurando a posição de inserção*/
-    while (ptaux != NULL)
-    {
-        ant = ptaux;
-        ptaux = ptaux->prox;
-    }
-
-    /*encaeia o elemento*/
-    if (ant == NULL) /*o anterior não existe, logo o elemento será inserido na
-                        primeira posição*/
-    {
-        //  puts("inserindo primeiro");
-        novo->prox = l;
-        l = novo;
-    } else /*elemento inserido no meio da lista*/
-    {
-        novo->prox = ant->prox;
-        ant->prox = novo;
-    }
-
-    return l;
+    return novo;
 }
 
 char *lse_consulta(LSE *l, int usr) {
@@ -62,7 +38,7 @@ LSE *lse_remove(LSE *l, int usr) {
     LSE *ptaux = l;  // ponteiro auxiliar para percorrer a lista
 
     /*procura o elemento na lista*/
-    while (ptaux != NULL && (ptaux->info.usr == usr)) {
+    while (ptaux != NULL && (ptaux->info.usr != usr)) {
         ant = ptaux;
         ptaux = ptaux->prox;
     }
