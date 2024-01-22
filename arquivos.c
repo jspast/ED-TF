@@ -8,31 +8,31 @@
 #include "senha.h"
 #include "arquivos.h"
 
-FILE *carrega_arquivo(char nome[])
+FILE *carrega_arq_leitura(char nome[])
 {
     FILE *arq1;     //arquivo com os logins
     if (!(arq1 = fopen(nome,"r"))) {     // abertura para leitura
-        printf("Erro na abertura de arquivos\n");
+        puts("Erro na leitura de arquivos");
         arq1 = NULL;
     }
     return arq1;
 }
 
-FILE *carrega_resultados1(char nome[])
+FILE *cria_arq_escrita(char nome[])
 {
     FILE *arq3;     //arquivo com os resultados
     if (!(arq3 = fopen(nome,"w"))) {     // abertura para escrita
-        printf("Erro na abertura de arquivos\n");
+        puts("Erro na criacao do arquivo de resultados");
         arq3 = NULL;
     }
     return arq3;
 }
 
-FILE *carrega_resultados2(char nome[])
+FILE *carrega_arq_escrita(char nome[])
 {
     FILE *arq3;     //arquivo com os resultados
     if (!(arq3 = fopen(nome,"a"))) {     // abertura para escrita
-        printf("Erro na abertura de arquivos\n");
+        puts("Erro na escrita do arquivo de resultados");
         arq3 = NULL;
     }
     return arq3;
@@ -49,11 +49,17 @@ Login monta_login(char linha[])
     return login;
 }
 
-LSE *lse_carrega(LSE *l, char nome[], double *tempo)
+LSE *lse_carrega(LSE *l, char nome_dados[], char nome_resultados[], double *tempo)
 {
-    FILE *arq1 = carrega_arquivo(nome);
+    FILE *arq1 = carrega_arq_leitura(nome_dados);
     if (arq1 == NULL)
         return NULL;
+
+    FILE *arq3 = cria_arq_escrita(nome_resultados);
+    if (arq3 == NULL)
+        return NULL;
+    
+    fprintf(arq3, "Testes com LSE:\n");
 
     time_t tempo_inicio, tempo_fim;
     time(&tempo_inicio);
@@ -66,39 +72,19 @@ LSE *lse_carrega(LSE *l, char nome[], double *tempo)
 
     time(&tempo_fim);
     *tempo = difftime(tempo_fim, tempo_inicio);
+    fprintf(arq3, "Tempo de carregamento: %.0lf segundos\n", *tempo);
     fclose(arq1);
+    fclose(arq3);
     return l;
-}
-
-AVL *avl_carrega(AVL *t, char nome[], double *tempo)
-{
-    FILE *arq1 = carrega_arquivo(nome);
-    if (arq1 == NULL)
-        return NULL;
-
-    time_t tempo_inicio, tempo_fim;
-    time(&tempo_inicio);
-
-    char linha[TAM_LINHA];
-    int ok = 0;
-
-    while (!feof(arq1))
-        if (fgets(linha, TAM_LINHA, arq1) != NULL)
-            t = avl_insere(t, monta_login(linha), &ok);
-
-    time(&tempo_fim);
-    *tempo = difftime(tempo_fim, tempo_inicio);
-    fclose(arq1);
-    return t;
 }
 
 void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *tempo)
 {
-    FILE *arq2 = carrega_arquivo(nome_testes);
+    FILE *arq2 = carrega_arq_leitura(nome_testes);
     if (arq2 == NULL)
         return;
 
-    FILE *arq3 = carrega_resultados1(nome_resultados);
+    FILE *arq3 = carrega_arq_escrita(nome_resultados);
     if (arq3 == NULL)
         return;
 
@@ -107,7 +93,6 @@ void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *temp
 
     char linha[TAM_LINHA];
 
-    fprintf(arq3, "Testes com LSE:\n");
     while (!feof(arq2)) {
         if (fgets(linha, TAM_LINHA, arq2) != NULL) {
             Login login = monta_login(linha);
@@ -127,13 +112,43 @@ void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *temp
     return;
 }
 
+AVL *avl_carrega(AVL *t, char nome_dados[], char nome_resultados[], double *tempo)
+{
+    FILE *arq1 = carrega_arq_leitura(nome_dados);
+    if (arq1 == NULL)
+        return NULL;
+
+    FILE *arq3 = carrega_arq_escrita(nome_resultados);
+    if (arq3 == NULL)
+        return NULL;
+    
+    fprintf(arq3, "\nTestes com AVL:\n");
+
+    time_t tempo_inicio, tempo_fim;
+    time(&tempo_inicio);
+
+    char linha[TAM_LINHA];
+    int ok = 0;
+
+    while (!feof(arq1))
+        if (fgets(linha, TAM_LINHA, arq1) != NULL)
+            t = avl_insere(t, monta_login(linha), &ok);
+
+    time(&tempo_fim);
+    *tempo = difftime(tempo_fim, tempo_inicio);
+    fprintf(arq3, "Tempo de carregamento: %.0lf segundos\n", *tempo);
+    fclose(arq1);
+    fclose(arq3);
+    return t;
+}
+
 void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], double *tempo)
 {
-    FILE *arq2 = carrega_arquivo(nome_testes);
+    FILE *arq2 = carrega_arq_leitura(nome_testes);
     if (arq2 == NULL)
         return;
 
-    FILE *arq3 = carrega_resultados2(nome_resultados);
+    FILE *arq3 = carrega_arq_escrita(nome_resultados);
     if (arq3 == NULL)
         return;
 
@@ -142,7 +157,6 @@ void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], double *temp
 
     char linha[TAM_LINHA];
 
-    fprintf(arq3, "\nTestes com AVL:\n");
     while (!feof(arq2)) {
         if (fgets(linha, TAM_LINHA, arq2) != NULL) {
             Login login = monta_login(linha);
