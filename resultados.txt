@@ -4,8 +4,8 @@ Testes com LSE:
 3	tes	OK
 Tempo de consulta: 0 segundos
 
-Testes com RN:
-1	teste	ERRO
+Testes com AVL:
+1	teste	OK
 2	teste	ERRO
-3	tes	ERRO
+3	tes	OK
 Tempo de consulta: 0 segundos

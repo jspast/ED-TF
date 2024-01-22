@@ -1,13 +1,13 @@
-#include "avl.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "avl.h"
 
 AVL *avl_insere_arvore(AVL *a, Login ch) {
   if (a == NULL) {
     a = (AVL *)malloc(sizeof(AVL));
-    a->info.usr = ch.usr;
+    a->info = ch;
     a->esq = NULL;
     a->dir = NULL;
     a->FB = 0; // o nodo � sempre inserido como folha ent�o seu fator de
@@ -183,7 +183,7 @@ AVL *avl_insere(AVL *a, Login x, int *ok) {
 
   if (a == NULL) {
     a = (AVL *)malloc(sizeof(AVL));
-    a->info.usr = x.usr;
+    a->info = x;
     a->esq = NULL;
     a->dir = NULL;
     a->FB = 0;
