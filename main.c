@@ -2,13 +2,13 @@
 #include <string.h>
 
 #include "lse.h"
-#include "rn.h"
+#include "avl.h"
 #include "arquivos.h"
 
 int main(int argc, char *argv[])
 {
     LSE *l = lse_cria_lista();
-    RNtree *t = NodoNULL;
+    AVL *t = NULL;
     char nome_dados[TAM_ARQUIVOS] = DADOS;
     char nome_testes[TAM_ARQUIVOS] = TESTES;
     char nome_resultados[TAM_ARQUIVOS] = RESULTADOS;
@@ -45,13 +45,13 @@ int main(int argc, char *argv[])
 
     lse_avalia(l, nome_testes, nome_resultados, &tempo);
 
-    // Teste RN
-    t = rn_carrega(t, nome_dados, &tempo);
+    // Teste AVL
+    t = avl_carrega(t, nome_dados, &tempo);
     if (t == NULL)
         return 0;
-    printf("Tempo de carregamento RN: %.0lf segundos\n", tempo);
+    printf("Tempo de carregamento AVL: %.0lf segundos\n", tempo);
     
-    rn_avalia(t, nome_testes, nome_resultados, &tempo);
+    avl_avalia(t, nome_testes, nome_resultados, &tempo);
 
     return 0;
 }

@@ -5,7 +5,7 @@ Testes com LSE:
 Tempo de consulta: 0 segundos
 
 Testes com RN:
-1	teste	OK
+1	teste	ERRO
 2	teste	ERRO
-3	tes	OK
+3	tes	ERRO
 Tempo de consulta: 0 segundos

@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "lse.h"
-#include "rn.h"
+#include "avl.h"
 #include "senha.h"
 #include "arquivos.h"
 
@@ -70,7 +70,7 @@ LSE *lse_carrega(LSE *l, char nome[], double *tempo)
     return l;
 }
 
-RNtree *rn_carrega(RNtree *t, char nome[], double *tempo)
+AVL *avl_carrega(AVL *t, char nome[], double *tempo)
 {
     FILE *arq1 = carrega_arquivo(nome);
     if (arq1 == NULL)
@@ -80,10 +80,11 @@ RNtree *rn_carrega(RNtree *t, char nome[], double *tempo)
     time(&tempo_inicio);
 
     char linha[TAM_LINHA];
+    int ok = 0;
 
     while (!feof(arq1))
         if (fgets(linha, TAM_LINHA, arq1) != NULL)
-            t = rn_insere(t, monta_login(linha));
+            t = avl_insere(t, monta_login(linha), &ok);
 
     time(&tempo_fim);
     *tempo = difftime(tempo_fim, tempo_inicio);
@@ -126,7 +127,7 @@ void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *temp
     return;
 }
 
-void rn_avalia(RNtree *t, char nome_testes[], char nome_resultados[], double *tempo)
+void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], double *tempo)
 {
     FILE *arq2 = carrega_arquivo(nome_testes);
     if (arq2 == NULL)
@@ -141,12 +142,12 @@ void rn_avalia(RNtree *t, char nome_testes[], char nome_resultados[], double *te
 
     char linha[TAM_LINHA];
 
-    fprintf(arq3, "\nTestes com RN:\n");
+    fprintf(arq3, "\nTestes com AVL:\n");
     while (!feof(arq2)) {
         if (fgets(linha, TAM_LINHA, arq2) != NULL) {
             Login login = monta_login(linha);
             fprintf(arq3, "%d\t%s\t", login.usr, login.senha);
-            if (strcmp(rn_consulta(t, login.usr), login.senha) == 0)
+            if (strcmp(avl_consulta(t, login.usr), login.senha) == 0)
                 fprintf(arq3, "OK\n");
             else
                 fprintf(arq3, "ERRO\n");

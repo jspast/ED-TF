@@ -7,7 +7,7 @@
 #include <time.h>
 
 #include "lse.h"
-#include "rn.h"
+#include "avl.h"
 #include "senha.h"
 
 #define TAM_ARQUIVOS 32
@@ -21,8 +21,8 @@ FILE *carrega_resultados2(char nome[]);
 FILE *carrega_resultados1(char nome[]);
 Login monta_login(char linha[]);
 LSE *lse_carrega(LSE *l, char nome[], double *tempo);
-RNtree *rn_carrega(RNtree *t, char nome[], double *tempo);
+AVL *avl_carrega(AVL *t, char nome[], double *tempo);
 void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *tempo);
-void rn_avalia(RNtree *t, char nome_testes[], char nome_resultados[], double *tempo);
+void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], double *tempo);
 
 #endif
