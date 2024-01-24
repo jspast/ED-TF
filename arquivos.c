@@ -61,8 +61,8 @@ LSE *lse_carrega(LSE *l, char nome_dados[], char nome_resultados[], double *temp
     
     fprintf(arq3, "Testes com LSE:\n");
 
-    time_t tempo_inicio, tempo_fim;
-    time(&tempo_inicio);
+    clock_t time;
+    time = clock();
 
     char linha[TAM_LINHA];
 
@@ -70,9 +70,11 @@ LSE *lse_carrega(LSE *l, char nome_dados[], char nome_resultados[], double *temp
         if (fgets(linha, TAM_LINHA, arq1) != NULL)
             l = lse_insere(l, monta_login(linha));
 
-    time(&tempo_fim);
-    *tempo = difftime(tempo_fim, tempo_inicio);
-    fprintf(arq3, "Tempo de carregamento: %.0lf segundos\n", *tempo);
+    *tempo = clock() - time;
+    
+
+    fprintf(arq3, "Tempo de carregamento: %.0lf milisegundos\n", *tempo/((CLOCKS_PER_SEC/1000)));
+
     fclose(arq1);
     fclose(arq3);
     return l;
@@ -88,8 +90,8 @@ void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *temp
     if (arq3 == NULL)
         return;
 
-    time_t tempo_inicio, tempo_fim;
-    time(&tempo_inicio);
+    clock_t time;
+    time = clock();
 
     char linha[TAM_LINHA];
 
@@ -104,9 +106,10 @@ void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], double *temp
         }
     }
 
-    time(&tempo_fim);
-    *tempo = difftime(tempo_fim, tempo_inicio);
-    fprintf(arq3, "Tempo de consulta: %.0lf segundos\n", *tempo);
+    *tempo = clock() - time;
+    
+
+    fprintf(arq3, "Tempo de consulta: %.0lf milisegundos\n", *tempo/((CLOCKS_PER_SEC/1000)));
     fclose (arq2);
     fclose (arq3);
     return;
@@ -124,8 +127,8 @@ AVL *avl_carrega(AVL *t, char nome_dados[], char nome_resultados[], double *temp
     
     fprintf(arq3, "\nTestes com AVL:\n");
 
-    time_t tempo_inicio, tempo_fim;
-    time(&tempo_inicio);
+    clock_t time;
+    time = clock();
 
     char linha[TAM_LINHA];
     int ok = 0;
@@ -134,9 +137,10 @@ AVL *avl_carrega(AVL *t, char nome_dados[], char nome_resultados[], double *temp
         if (fgets(linha, TAM_LINHA, arq1) != NULL)
             t = avl_insere(t, monta_login(linha), &ok);
 
-    time(&tempo_fim);
-    *tempo = difftime(tempo_fim, tempo_inicio);
-    fprintf(arq3, "Tempo de carregamento: %.0lf segundos\n", *tempo);
+    *tempo = clock() - time;
+    
+    
+    fprintf(arq3, "Tempo de carregamento: %.0lf milisegundos\n", *tempo/((CLOCKS_PER_SEC/1000)));
     fclose(arq1);
     fclose(arq3);
     return t;
@@ -152,8 +156,8 @@ void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], double *temp
     if (arq3 == NULL)
         return;
 
-    time_t tempo_inicio, tempo_fim;
-    time(&tempo_inicio);
+    clock_t time;
+    time = clock();
 
     char linha[TAM_LINHA];
 
@@ -167,9 +171,10 @@ void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], double *temp
                 fprintf(arq3, "ERRO\n");
         }
     }
-    time(&tempo_fim);
-    *tempo = difftime(tempo_fim, tempo_inicio);
-    fprintf(arq3, "Tempo de consulta: %.0lf segundos\n", *tempo);
+    *tempo = clock() - time;
+    
+
+    fprintf(arq3, "Tempo de consulta: %.0lf milisegundos\n", *tempo/((CLOCKS_PER_SEC/1000)));
     fclose (arq2);
     fclose (arq3);
     return;
