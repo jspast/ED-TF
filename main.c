@@ -41,20 +41,20 @@ int main(int argc, char *argv[])
     l = lse_carrega(l, nome_dados, nome_resultados, &tempo);
     if (l == NULL)
         return 0;
-    printf("Tempo de carregamento LSE: %.0lf segundos\n", tempo);
+    printf("Tempo de carregamento LSE: %.0lf milisegundos\n", tempo);
 
     lse_avalia(l, nome_testes, nome_resultados, &tempo);
-    printf("Tempo de consulta LSE: %.0lf segundos\n", tempo);
+    printf("Tempo de consulta LSE: %.0lf milisegundos\n", tempo);
 
 
     // Teste AVL
     t = avl_carrega(t, nome_dados, nome_resultados, &tempo);
     if (t == NULL)
         return 0;
-    printf("Tempo de carregamento AVL: %.0lf segundos\n", tempo);
+    printf("Tempo de carregamento AVL: %.0lf milisegundos\n", tempo);
     
     avl_avalia(t, nome_testes, nome_resultados, &tempo);
-    printf("Tempo de consulta AVL: %.0lf segundos\n", tempo);
+    printf("Tempo de consulta AVL: %.0lf milisegundos\n", tempo);
 
     return 0;
 }
