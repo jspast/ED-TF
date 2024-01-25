@@ -56,3 +56,4 @@ dkms.conf
 build/
 .clang-format
 outDebug
+resultados100000.txt

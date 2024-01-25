@@ -1,7 +1,7 @@
 #ifndef AVL_H
 #define AVL_H
 
-#include "senha.h"
+#include "login.h"
 
 typedef struct AVLnodo AVL;
 

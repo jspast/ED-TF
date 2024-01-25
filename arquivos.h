@@ -8,7 +8,7 @@
 
 #include "lse.h"
 #include "avl.h"
-#include "senha.h"
+#include "login.h"
 
 #define TAM_ARQUIVOS 32
 #define TAM_LINHA (TAM_LOGIN + 2)

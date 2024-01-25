@@ -1,7 +1,7 @@
 #ifndef LSE_H
 #define LSE_H
 
-#include "senha.h"
+#include "login.h"
 
 typedef struct LSEnodo LSE;
 

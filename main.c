@@ -4,6 +4,7 @@
 #include "lse.h"
 #include "avl.h"
 #include "arquivos.h"
+#include "login.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,10 +13,33 @@ int main(int argc, char *argv[])
     char nome_dados[TAM_ARQUIVOS] = DADOS;
     char nome_testes[TAM_ARQUIVOS] = TESTES;
     char nome_resultados[TAM_ARQUIVOS] = RESULTADOS;
+    int numero_logins, porcentagem_erros;
+    char s_n;
     double tempo;
 
-    if(argc > 1 && strcmp(argv[1], "-d") == 0) {
+    if (argc > 1 && strcmp(argv[1], "-d") == 0) {
         puts("Usando nomes de arquivos default");
+    } else if (argc > 1 && strcmp(argv[1], "-g") == 0) {
+        puts("Gerando arquivos da base de dados e base de testes");
+        puts("Digite o nome do arquivo da base de dados:");
+        scanf("%s", nome_dados);
+        puts("Digite o numero de logins da base de dados:");
+        scanf("%d", &numero_logins);
+        puts("Deseja gerar base de dados ordenada? (s/n)");
+        getchar();
+        scanf("%c", &s_n);
+        if (s_n == 's' || s_n == 'S')
+            gera_dados_ord(nome_dados, numero_logins);
+        else
+            gera_dados(nome_dados, numero_logins);
+        puts("Digite o nome do arquivo da base de testes:");
+        scanf("%s", nome_testes);
+        puts("Digite o numero de logins da base de testes:");
+        scanf("%d", &numero_logins);
+        puts("Digite a porcentagem de erros nos logins da base de testes:");
+        scanf("%d", &porcentagem_erros);
+        gera_testes(nome_testes, numero_logins, porcentagem_erros);
+        return 0;
     } else {
         if (argc <= 1) {
             puts("Digite o nome do arquivo da base de dados:");

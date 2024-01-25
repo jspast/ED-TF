@@ -5,7 +5,7 @@
 
 #include "lse.h"
 #include "avl.h"
-#include "senha.h"
+#include "login.h"
 #include "arquivos.h"
 
 FILE *carrega_arq_leitura(char nome[])
@@ -22,7 +22,7 @@ FILE *cria_arq_escrita(char nome[])
 {
     FILE *arq3;     //arquivo com os resultados
     if (!(arq3 = fopen(nome,"w"))) {     // abertura para escrita
-        puts("Erro na criacao do arquivo de resultados");
+        puts("Erro na criacao de arquivo");
         arq3 = NULL;
     }
     return arq3;
