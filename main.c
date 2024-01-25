@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     char nome_resultados[TAM_ARQUIVOS] = RESULTADOS;
     int numero_logins, porcentagem_erros;
     char s_n;
-    double tempo;
+    long tempo;
 
     if (argc > 1 && strcmp(argv[1], "-d") == 0) {
         puts("Usando nomes de arquivos default");
@@ -65,20 +65,20 @@ int main(int argc, char *argv[])
     l = lse_carrega(l, nome_dados, nome_resultados, &tempo);
     if (l == NULL)
         return 0;
-    printf("Tempo de carregamento LSE: %.0lf milisegundos\n", tempo);
+    printf("Tempo de carregamento LSE: %.0ld milisegundos\n", tempo);
 
     lse_avalia(l, nome_testes, nome_resultados, &tempo);
-    printf("Tempo de consulta LSE: %.0lf milisegundos\n", tempo);
+    printf("Tempo de consulta LSE: %.0ld milisegundos\n", tempo);
 
 
     // Teste AVL
     t = avl_carrega(t, nome_dados, nome_resultados, &tempo);
     if (t == NULL)
         return 0;
-    printf("Tempo de carregamento AVL: %.0lf milisegundos\n", tempo);
+    printf("Tempo de carregamento AVL: %.0ld milisegundos\n", tempo);
     
     avl_avalia(t, nome_testes, nome_resultados, &tempo);
-    printf("Tempo de consulta AVL: %.0lf milisegundos\n", tempo);
+    printf("Tempo de consulta AVL: %.0ld milisegundos\n", tempo);
 
     return 0;
 }

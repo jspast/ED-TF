@@ -13,7 +13,7 @@ struct TipoLogin {
     char senha[TAM_MAX_SENHA];
 };
 
-char* generate_random_string(int length);
+char* generate_random_string(unsigned length);
 void gera_dados_ord(char nome_dados[], int n);
 void gera_dados(char nome_dados[], int n);
 void gera_testes(char nome_testes[], int n, int p);
