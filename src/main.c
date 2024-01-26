@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     int numero_logins_dados, numero_logins, porcentagem_erros;
     long tempo;
 
-    // Verifica argumentos de inicialização
+    // Verifica opções de inicialização
     if (argc > 1) {
         if (strcmp(argv[1], "-h") == 0) {
             printf("Uso:\t%s [nome_dados] [nome_testes] [nome_resultados]\n\t%s [opcao]\n", NOME_EXEC, NOME_EXEC);
@@ -58,27 +58,26 @@ int main(int argc, char *argv[])
 
         } else if (strcmp(argv[1], "-d") == 0) {
             puts("Usando nomes de arquivos default");
-            
-        } else {
-            if (argc <= 1) {
-                puts("Digite o nome do arquivo da base de dados:");
-                scanf("%s", nome_dados);
-            } else {
-                strcpy(nome_dados, argv[1]);
-            }
-            if (argc <= 2) {
-                puts("Digite o nome do arquivo da base de testes:");
-                scanf("%s", nome_testes);
-            } else {
-                strcpy(nome_testes, argv[2]);
-            }
-            if (argc <= 3) {
-                puts("Digite o nome do arquivo dos resultados:");
-                scanf("%s", nome_resultados);
-            } else {
-                strcpy(nome_resultados, argv[3]);
-            }
-        }   
+        }
+    }
+    // Verifica arquivos nos argumentos de inicialização
+    if (argc <= 1) {
+        puts("Digite o nome do arquivo da base de dados:");
+        scanf("%s", nome_dados);            
+    } else {
+        strcpy(nome_dados, argv[1]);            
+    }
+    if (argc <= 2) {
+        puts("Digite o nome do arquivo da base de testes:");
+        scanf("%s", nome_testes);            
+    } else {
+        strcpy(nome_testes, argv[2]);            
+    }
+    if (argc <= 3) {
+        puts("Digite o nome do arquivo dos resultados:");
+        scanf("%s", nome_resultados);            
+    } else {
+        strcpy(nome_resultados, argv[3]);            
     }
 
     // Teste LSE
