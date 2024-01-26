@@ -97,7 +97,10 @@ void lse_avalia(LSE *l, char nome_testes[], char nome_resultados[], long *tempo)
     while (!feof(arq2)) {
         if (fgets(linha, TAM_LINHA, arq2) != NULL) {
             Login login = monta_login(linha);
-            fprintf(arq3, "%d\t%s\t", login.usr, login.senha);
+            if(login.usr < 1000)    // Garante que todas linhas do arquivo de resultados fiquem alinhadas
+                fprintf(arq3, "%d\t\t%s\t", login.usr, login.senha);
+            else
+                fprintf(arq3, "%d\t%s\t", login.usr, login.senha);
             if (strcmp(lse_consulta(l, login.usr), login.senha) == 0)
                 fprintf(arq3, "OK\n");
             else
@@ -161,7 +164,10 @@ void avl_avalia(AVL *t, char nome_testes[], char nome_resultados[], long *tempo)
     while (!feof(arq2)) {
         if (fgets(linha, TAM_LINHA, arq2) != NULL) {
             Login login = monta_login(linha);
-            fprintf(arq3, "%d\t%s\t", login.usr, login.senha);
+            if(login.usr < 1000)    // Garante que todas linhas do arquivo de resultados fiquem alinhadas
+                fprintf(arq3, "%d\t\t%s\t", login.usr, login.senha);
+            else
+                fprintf(arq3, "%d\t%s\t", login.usr, login.senha);
             if (strcmp(avl_consulta(t, login.usr), login.senha) == 0)
                 fprintf(arq3, "OK\n");
             else
