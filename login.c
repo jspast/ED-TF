@@ -34,20 +34,14 @@ void gera_dados_ord(char nome_dados[], int n)
         free(random_string);
     }
     fclose(arq);
-    puts("Arquivo de base de dados de teste gerado com sucesso");
+    puts("Arquivo de base de dados ordenada gerado com sucesso");
 }
 
-// Struct to hold the id and the random string
-typedef struct {
-    int id;
-    char* string;
-} Data;
-
-// Function to shuffle an array of Data
-void shuffle_data(Data* array, int n) {
+// Function to shuffle an array of Login
+void shuffle_data(Login* array, int n) {
     for (int i = n - 1; i > 0; i--) {
         int j = rand() % (i + 1);
-        Data temp = array[i];
+        Login temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
@@ -58,10 +52,10 @@ void gera_dados(char nome_dados[], int n) {
     srand((unsigned int)time(NULL));
 
     // Create and fill the array with data in order
-    Data* data = malloc((size_t)n * sizeof(Data));
+    Login* data = malloc((size_t)n * sizeof(Login));
     for (int i = 0; i < n; i++) {
-        data[i].id = i + 1;
-        data[i].string = generate_random_string(TAM_SENHA);
+        data[i].usr = i + 1;
+        strcpy(data[i].senha, generate_random_string(TAM_SENHA));
     }
 
     // Shuffle the array
@@ -70,17 +64,70 @@ void gera_dados(char nome_dados[], int n) {
     // Write the shuffled data to the file
     FILE *arq = cria_arq_escrita(nome_dados);
     for (int i = 0; i < n; i++) {
-        fprintf(arq, "%d,%s\n", data[i].id, data[i].string);
-        free(data[i].string);
+        fprintf(arq, "%d,%s\n", data[i].usr, data[i].senha);
     }
     fclose(arq);
     free(data);
 
-    puts("Arquivo de base de dados de teste desordenado gerado com sucesso");
+    puts("Arquivo de base de dados gerado com sucesso");
 }
 
 // Função gerada com auxílio do Github Copilot
-void gera_testes(char nome_testes[], int n, int p)
-{
+void gera_testes(char nome_dados[], char nome_testes[], int nd, int n, int p) {
+    srand((unsigned int)time(NULL));
 
+    // Calculate the number of wrong inputs
+    int wrong_inputs = (n * p) / 100;
+
+    // Open the file for writing
+    FILE *arq = cria_arq_escrita(nome_testes);
+
+    for (int i = 0; i < n; i++) {
+        int id = rand() % nd + 1;  // Generate a random id
+        char* string;
+
+        if (i < wrong_inputs) {
+            // Generate a wrong input
+            string = generate_random_string(TAM_SENHA);
+        } else {
+            // Generate a correct input
+            string = get_string_for_id(nome_dados, id);
+        }
+
+        fprintf(arq, "%d,%s\n", id, string);
+        free(string);
+    }
+
+    fclose(arq);
+
+    puts("Arquivo de testes gerado com sucesso");
+}
+
+char* get_string_for_id(char nome_dados[], int id) {
+
+    FILE *arq = carrega_arq_leitura(nome_dados);
+
+    char line[TAM_LINHA];
+    while (fgets(line, sizeof(line), arq)) {
+        int current_id;
+        char string[TAM_MAX_SENHA];
+
+        // Parse the line
+        if (sscanf(line, "%d,%s", &current_id, string) != 2) {
+            continue;  // Invalid line, skip it
+        }
+
+        // Check if the id matches
+        if (current_id == id) {
+            fclose(arq);
+
+            // Return a copy of the string
+            char* result = malloc((strlen(string) + 1) * sizeof(char));
+            strcpy(result, string);
+            return result;
+        }
+    }
+
+    fclose(arq);
+    return NULL;  // No match found
 }
