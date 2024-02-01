@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     LSE *l = lse_cria_lista();
     AVL *t = NULL;
     char nome_dados[TAM_ARQUIVOS] = DADOS;
+    char nome_dados_ord[TAM_ARQUIVOS] = DADOS_ORD;
     char nome_testes[TAM_ARQUIVOS] = TESTES;
     char nome_resultados[TAM_ARQUIVOS] = RESULTADOS;
     int numero_logins_dados, numero_logins, porcentagem_erros;
@@ -35,10 +36,9 @@ int main(int argc, char *argv[])
             scanf("%d", &numero_logins);
             puts("Digite o nome do arquivo da base de dados não ordenada:");
             scanf("%s", nome_dados);
-            gera_dados(nome_dados, numero_logins);
             puts("Digite o nome do arquivo da base de dados ordenada:");
-            scanf("%s", nome_dados);
-            gera_dados_ord(nome_dados, numero_logins);
+            scanf("%s", nome_dados_ord);
+            gera_dados(nome_dados, nome_dados_ord, numero_logins);
             return 0;
 
         } else if (strcmp(argv[1], "-gt") == 0) {

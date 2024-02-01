@@ -21,22 +21,6 @@ char* generate_random_string(unsigned length) {
     return string;
 }
 
-// Função gerada com auxílio do Github Copilot
-void gera_dados_ord(char nome_dados[], int n)
-{
-    srand((unsigned int)time(NULL));
-
-    FILE *arq = cria_arq_escrita(nome_dados);
-
-    for (int i = 1; i <= n; i++) {
-        char* random_string = generate_random_string(TAM_SENHA);
-        fprintf(arq, "%d,%s\n", i, random_string);
-        free(random_string);
-    }
-    fclose(arq);
-    puts("Arquivo de base de dados ordenada gerado com sucesso");
-}
-
 // Function to shuffle an array of Login
 void shuffle_data(Login* array, int n) {
     for (int i = n - 1; i > 0; i--) {
@@ -48,7 +32,7 @@ void shuffle_data(Login* array, int n) {
 }
 
 // Função gerada com auxílio do Github Copilot
-void gera_dados(char nome_dados[], int n) {
+void gera_dados(char nome_dados[], char nome_dados_ord[], int n) {
     srand((unsigned int)time(NULL));
 
     // Create and fill the array with data in order
@@ -58,18 +42,25 @@ void gera_dados(char nome_dados[], int n) {
         strcpy(data[i].senha, generate_random_string(TAM_SENHA));
     }
 
+    // Escreve os dados ordenados no arquivo
+    FILE *arq = cria_arq_escrita(nome_dados_ord);
+    for (int i = 0; i < n; i++) {
+        fprintf(arq, "%d,%s\n", data[i].usr, data[i].senha);
+    }
+
     // Shuffle the array
     shuffle_data(data, n);
 
     // Write the shuffled data to the file
-    FILE *arq = cria_arq_escrita(nome_dados);
+    FILE *arq1 = cria_arq_escrita(nome_dados);
     for (int i = 0; i < n; i++) {
-        fprintf(arq, "%d,%s\n", data[i].usr, data[i].senha);
+        fprintf(arq1, "%d,%s\n", data[i].usr, data[i].senha);
     }
     fclose(arq);
+    fclose(arq1);
     free(data);
 
-    puts("Arquivo de base de dados gerado com sucesso");
+    puts("Arquivos de base de dados gerados com sucesso");
 }
 
 // Função gerada com auxílio do Github Copilot

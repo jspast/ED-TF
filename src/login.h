@@ -14,9 +14,8 @@ struct TipoLogin {
 };
 
 char* generate_random_string(unsigned length);
-void gera_dados_ord(char nome_dados[], int n);
 void shuffle_data(Login* array, int n);
-void gera_dados(char nome_dados[], int n);
+void gera_dados(char nome_dados[], char nome_dados_ord[], int n);
 void gera_testes(char nome_dados[], char nome_testes[], int nd, int n, int p);
 char* get_string_for_id(char nome_dados[], int id);
 

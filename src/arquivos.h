@@ -13,6 +13,7 @@
 #define TAM_ARQUIVOS 32
 #define TAM_LINHA (TAM_LOGIN + 2)
 #define DADOS "dados.txt"
+#define DADOS_ORD "dados_ord.txt"
 #define TESTES "testes.txt"
 #define RESULTADOS "resultados.txt"
 
