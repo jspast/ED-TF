@@ -1,0 +1,332 @@
+
+-------------- NAO ORDENADO ----------------------
+
+
+DADOS 500 - testes_500_10_10
+
+Tempo de carregamento LSE: 0.000233 segundos
+Tempo de consulta LSE: 0.000038 segundos
+Tempo de carregamento AVL: 0.000353 segundos
+Tempo de consulta AVL: 0.000027 segundos
+
+DADOS 500 - testes_500_10_50
+
+Tempo de carregamento LSE: 0.000650 segundos
+Tempo de consulta LSE: 0.000152 segundos
+Tempo de carregamento AVL: 0.000800 segundos
+Tempo de consulta AVL: 0.000018 segundos
+
+DADOS 500 - testes_500_100_10
+
+Tempo de carregamento LSE: 0.001003 segundos
+Tempo de consulta LSE: 0.000167 segundos
+Tempo de carregamento AVL: 0.000988 segundos
+Tempo de consulta AVL: 0.000113 segundos
+
+DADOS 500 - testes_500_100_50
+
+Tempo de carregamento LSE: 0.000592 segundos
+Tempo de consulta LSE: 0.000725 segundos
+Tempo de carregamento AVL: 0.000778 segundos
+Tempo de consulta AVL: 0.000314 segundos
+
+DADOS 500 - testes_500_1000_10
+
+Tempo de carregamento LSE: 0.000782 segundos
+Tempo de consulta LSE: 0.003902 segundos
+Tempo de carregamento AVL: 0.000257 segundos
+Tempo de consulta AVL: 0.001008 segundos
+
+DADOS 500 - testes_500_1000_50
+
+Tempo de carregamento LSE: 0.001041 segundos
+Tempo de consulta LSE: 0.009836 segundos
+Tempo de carregamento AVL: 0.001255 segundos
+Tempo de consulta AVL: 0.002481 segundos
+
+DADOS 10000 - testes_10000_10_10
+
+Tempo de carregamento LSE: 0.003476 segundos
+Tempo de consulta LSE: 0.000468 segundos
+Tempo de carregamento AVL: 0.005550 segundos
+Tempo de consulta AVL: 0.000031 segundos
+
+DADOS 10000 - testes_10000_10_50
+
+Tempo de carregamento LSE: 0.012303 segundos
+Tempo de consulta LSE: 0.001879 segundos
+Tempo de carregamento AVL: 0.032829 segundos
+Tempo de consulta AVL: 0.000163 segundos
+
+DADOS 10000 - testes_10000_100_10
+
+Tempo de carregamento LSE: 0.012141 segundos
+Tempo de consulta LSE: 0.008193 segundos
+Tempo de carregamento AVL: 0.012450 segundos
+Tempo de consulta AVL: 0.000150 segundos
+
+DADOS 10000 - testes_10000_100_50
+
+Tempo de carregamento LSE: 0.004186 segundos
+Tempo de consulta LSE: 0.005264 segundos
+Tempo de carregamento AVL: 0.013443 segundos
+Tempo de consulta AVL: 0.000230 segundos
+
+DADOS 10000 - testes_10000_1000_10
+
+Tempo de carregamento LSE: 0.003680 segundos
+Tempo de consulta LSE: 0.000760 segundos
+Tempo de carregamento AVL: 0.006364 segundos
+Tempo de consulta AVL: 0.000764 segundos
+
+DADOS 10000 - testes_10000_1000_50
+
+Tempo de carregamento LSE: 0.015942 segundos
+Tempo de consulta LSE: 0.002544 segundos
+Tempo de carregamento AVL: 0.015162 segundos
+Tempo de consulta AVL: 0.000462 segundos
+
+DADOS 100000 - testes_100000_10_10
+
+Tempo de carregamento LSE: 0.036929 segundos
+Tempo de consulta LSE: 0.009659 segundos
+Tempo de carregamento AVL: 0.126639 segundos
+Tempo de consulta AVL: 0.000526 segundos
+
+DADOS 100000 - testes_100000_10_50
+
+Tempo de carregamento LSE: 0.030211 segundos
+Tempo de consulta LSE: 0.009990 segundos
+Tempo de carregamento AVL: 0.116080 segundos
+Tempo de consulta AVL: 0.000726 segundos
+
+
+DADOS 100000 - testes_100000_100_10
+
+Tempo de carregamento LSE: 0.035912 segundos
+Tempo de consulta LSE: 0.006733 segundos
+Tempo de carregamento AVL: 0.130072 segundos
+Tempo de consulta AVL: 0.000572 segundos
+
+DADOS 100000 - testes_100000_100_50
+
+Tempo de carregamento LSE: 0.041225 segundos
+Tempo de consulta LSE: 0.007625 segundos
+Tempo de carregamento AVL: 0.136668 segundos
+Tempo de consulta AVL: 0.000967 segundos
+
+DADOS 100000 - testes_100000_1000_10
+
+Tempo de carregamento LSE: 0.093272 segundos
+Tempo de consulta LSE: 0.000652 segundos
+Tempo de carregamento AVL: 0.124955 segundos
+Tempo de consulta AVL: 0.000975 segundos
+
+DADOS 100000 - testes_100000_1000_50
+
+Tempo de carregamento LSE: 0.040006 segundos
+Tempo de consulta LSE: 0.005006 segundos
+Tempo de carregamento AVL: 0.122423 segundos
+Tempo de consulta AVL: 0.000997 segundos
+
+
+----------------- ORDENADO ------------------------
+
+DADOS 500_ORD - testes_500_10_10
+
+Tempo de carregamento LSE: 0.000604 segundos
+Tempo de consulta LSE: 0.000168 segundos
+Tempo de carregamento AVL: 0.000900 segundos
+Tempo de consulta AVL: 0.000093 segundos
+
+
+DADOS 500_ORD - testes_500_10_50
+
+Tempo de carregamento LSE: 0.000606 segundos
+Tempo de consulta LSE: 0.000202 segundos
+Tempo de carregamento AVL: 0.001616 segundos
+Tempo de consulta AVL: 0.000125 segundos
+
+DADOS 500_ORD - testes_500_100_10
+
+Tempo de carregamento LSE: 0.000829 segundos
+Tempo de consulta LSE: 0.001088 segundos
+Tempo de carregamento AVL: 0.001090 segundos
+Tempo de consulta AVL: 0.000437 segundos
+
+DADOS 500_ORD - testes_500_100_50
+
+Tempo de carregamento LSE: 0.000366 segundos
+Tempo de consulta LSE: 0.000416 segundos
+Tempo de carregamento AVL: 0.000496 segundos
+Tempo de consulta AVL: 0.000188 segundos
+
+DADOS 500_ORD - testes_500_1000_10
+
+Tempo de carregamento LSE: 0.000201 segundos
+Tempo de consulta LSE: 0.002283 segundos
+Tempo de carregamento AVL: 0.000336 segundos
+Tempo de consulta AVL: 0.001150 segundos
+
+DADOS 500_ORD - testes_500_1000_50
+
+Tempo de carregamento LSE: 0.000947 segundos
+Tempo de consulta LSE: 0.008939 segundos
+Tempo de carregamento AVL: 0.001132 segundos
+Tempo de consulta AVL: 0.004067 segundos
+
+
+DADOS 10000_ORD - testes_10000_10_10
+
+Tempo de carregamento LSE: 0.008606 segundos
+Tempo de consulta LSE: 0.001083 segundos
+Tempo de carregamento AVL: 0.010405 segundos
+Tempo de consulta AVL: 0.000045 segundos
+
+DADOS 10000_ORD - testes_10000_10_50
+
+Tempo de carregamento LSE: 0.011553 segundos
+Tempo de consulta LSE: 0.002212 segundos
+Tempo de carregamento AVL: 0.026990 segundos
+Tempo de consulta AVL: 0.000135 segundos
+
+DADOS 10000_ORD - testes_10000_100_10
+
+Tempo de carregamento LSE: 0.009635 segundos
+Tempo de consulta LSE: 0.011318 segundos
+Tempo de carregamento AVL: 0.007133 segundos
+Tempo de consulta AVL: 0.000256 segundos
+
+DADOS 10000_ORD - testes_10000_100_50
+
+Tempo de carregamento LSE: 0.009683 segundos
+Tempo de consulta LSE: 0.007718 segundos
+Tempo de carregamento AVL: 0.007951 segundos
+Tempo de consulta AVL: 0.000763 segundos
+
+
+DADOS 10000_ORD - testes_10000_1000_10
+
+Tempo de carregamento LSE: 0.012193 segundos
+Tempo de consulta LSE: 0.009734 segundos
+Tempo de carregamento AVL: 0.010970 segundos
+Tempo de consulta AVL: 0.000881 segundos
+
+DADOS 10000_ORD - testes_10000_1000_50
+
+Tempo de carregamento LSE: 0.003205 segundos
+Tempo de consulta LSE: 0.006534 segundos
+Tempo de carregamento AVL: 0.004240 segundos
+Tempo de consulta AVL: 0.000540 segundos
+
+DADOS 100000_ORD - testes_100000_10_10
+
+Tempo de carregamento LSE: 0.042439 segundos
+Tempo de consulta LSE: 0.008027 segundos
+Tempo de carregamento AVL: 0.060316 segundos
+Tempo de consulta AVL: 0.000043 segundos
+
+DADOS 100000_ORD - testes_100000_10_50
+
+Tempo de carregamento LSE: 0.076535 segundos
+Tempo de consulta LSE: 0.003534 segundos
+Tempo de carregamento AVL: 0.051098 segundos
+Tempo de consulta AVL: 0.000180 segundos
+
+DADOS 100000_ORD - testes_100000_100_10
+
+Tempo de carregamento LSE: 0.077395 segundos
+Tempo de consulta LSE: 0.005245 segundos
+Tempo de carregamento AVL: 0.048535 segundos
+Tempo de consulta AVL: 0.000560 segundos
+
+DADOS 100000_ORD - testes_100000_100_50
+
+Tempo de carregamento LSE: 0.021446 segundos
+Tempo de consulta LSE: 0.004313 segundos
+Tempo de carregamento AVL: 0.043343 segundos
+Tempo de consulta AVL: 0.000683 segundos
+
+DADOS 100000_ORD - testes_100000_1000_10
+
+Tempo de carregamento LSE: 0.038108 segundos
+Tempo de consulta LSE: 0.008565 segundos
+Tempo de carregamento AVL: 0.057974 segundos
+Tempo de consulta AVL: 0.000925 segundos
+
+DADOS 100000_ORD - testes_100000_1000_50
+
+Tempo de carregamento LSE: 0.033911 segundos
+Tempo de consulta LSE: 0.006322 segundos
+Tempo de carregamento AVL: 0.062260 segundos
+Tempo de consulta AVL: 0.000933 segundos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
