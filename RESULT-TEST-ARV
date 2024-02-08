@@ -60,16 +60,16 @@ Tempo de consulta AVL: 0.000163 segundos
 
 DADOS 10000 - testes_10000_100_10
 
-Tempo de carregamento LSE: 0.012141 segundos
+Tempo de carregamento LSE: 0.002141 segundos
 Tempo de consulta LSE: 0.008193 segundos
-Tempo de carregamento AVL: 0.012450 segundos
+Tempo de carregamento AVL: 0.002450 segundos
 Tempo de consulta AVL: 0.000150 segundos
 
 DADOS 10000 - testes_10000_100_50
 
 Tempo de carregamento LSE: 0.004186 segundos
 Tempo de consulta LSE: 0.005264 segundos
-Tempo de carregamento AVL: 0.013443 segundos
+Tempo de carregamento AVL: 0.005443 segundos
 Tempo de consulta AVL: 0.000230 segundos
 
 DADOS 10000 - testes_10000_1000_10
