@@ -40,9 +40,9 @@ Tempo de consulta AVL: 0.001008 segundos
 DADOS 500 - testes_500_1000_50
 
 Tempo de carregamento LSE: 0.001041 segundos
-Tempo de consulta LSE: 0.009836 segundos
+Tempo de consulta LSE: 0.004836 segundos
 Tempo de carregamento AVL: 0.001255 segundos
-Tempo de consulta AVL: 0.0002481 segundos
+Tempo de consulta AVL: 0.002481 segundos
 
 DADOS 10000 - testes_10000_10_10
 
