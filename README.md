@@ -18,8 +18,8 @@ ___
      
 - [x] Funções de geração de dados para testar o programa
 
-- [ ] Análise dos resultados
-- [ ] Relatório
+- [x] Análise dos resultados
+- [x] Relatório
 - [ ] Vídeo
 
 ### Especificação do trabalho:
