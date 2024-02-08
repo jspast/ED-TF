@@ -187,7 +187,7 @@ DADOS 10000_ORD - testes_10000_10_50
 
 Tempo de carregamento LSE: 0.011553 segundos
 Tempo de consulta LSE: 0.002212 segundos
-Tempo de carregamento AVL: 0.026990 segundos
+Tempo de carregamento AVL: 0.006990 segundos
 Tempo de consulta AVL: 0.000135 segundos
 
 DADOS 10000_ORD - testes_10000_100_10
