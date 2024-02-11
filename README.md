@@ -20,7 +20,7 @@ ___
 
 - [x] Análise dos resultados
 - [x] Relatório
-- [ ] Vídeo
+- [x] Vídeo
 
 ### Especificação do trabalho:
 https://moodle.ufrgs.br/pluginfile.php/6573347/mod_resource/content/2/ED-TF-23-2.pdf
